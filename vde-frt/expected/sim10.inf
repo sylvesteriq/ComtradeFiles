@@ -1,0 +1,44 @@
+[PFM300 General]
+timezone=W. Europe Standard Time
+utcOffset=0
+timeFracsecBase=10000000
+[PFM300 Trigger1]
+type=GCC_START
+timeSoc=1586877052
+timeFracsec=0
+timeFracsecRaw=0
+utcOffset=0
+id=1190930309
+signalName=VdeFrt
+gccGroupId=1032183553
+message=LVRT started
+[PFM300 Trigger2]
+type=GCC_INFO
+timeSoc=1586877052
+timeFracsec=500
+timeFracsecRaw=5000000
+utcOffset=0
+id=225491658
+signalName=VdeFrt
+gccGroupId=1032183553
+message=All three voltages lower than threshold, synchronous fault
+[PFM300 Trigger3]
+type=GCC_INFO
+timeSoc=1586877053
+timeFracsec=10
+timeFracsecRaw=100000
+utcOffset=0
+id=1804460738
+signalName=VdeFrt
+gccGroupId=1032183553
+message=Limit violated during LVRT, generator is allowed to disconnect
+[PFM300 Trigger4]
+type=GCC_END_SUCCESS
+timeSoc=1586877056
+timeFracsec=0
+timeFracsecRaw=0
+utcOffset=0
+id=1796346566
+signalName=VdeFrt
+gccGroupId=1032183553
+message=Regular generator disconnect during LVRT

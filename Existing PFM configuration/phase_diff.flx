@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<flowchart name="phase_diff" revision="255">
+    <properties name="phase_diff" category="SSR" description="" version="" release-notes=""/>
+    <parameters/>
+    <variables>
+        <variable name="ph1" type="rad" mode="IN" description=""/>
+        <variable name="ph2" type="rad" mode="IN" description=""/>
+        <variable name="diff" type="rad" mode="OUT" description=""/>
+        <variable name="diff2" type="rad" mode="OUT" description=""/>
+    </variables>
+    <state-variables>
+        <state-variable name="c" initial-value="NIL"/>
+        <state-variable name="d" initial-value="NIL"/>
+    </state-variables>
+    <subchart x="0.0" y="0.0" id="-1">
+        <expression>ROOT</expression>
+        <elements>
+            <state x="150.0" y="150.0" id="0">
+                <expression>START</expression>
+            </state>
+            <state x="650.0" y="750.0" id="1">
+                <expression>END</expression>
+            </state>
+            <process x="375.0" y="100.0" id="2">
+                <expression>( setf diff(- ph1 ph2))
+( setf diff2(- ph1 ph2))</expression>
+            </process>
+            <line from-pt="1" to-pt="3" from-id="0" to-id="2" id="3"/>
+            <process x="375.0" y="450.0" id="5">
+                <expression>(setf diff (- diff (* 4. (asin 1.) )))</expression>
+            </process>
+            <decision x="375.0" y="300.0" id="8">
+                <expression>(&gt;=  diff (* 2. (asin 1.) ))</expression>
+            </decision>
+            <line from-pt="2" to-pt="0" from-id="2" to-id="8" id="9"/>
+            <line from-pt="2" to-pt="0" from-id="8" to-id="5" id="10">
+                <expression>T</expression>
+            </line>
+            <line from-pt="2" to-pt="3" from-id="5" to-id="1" id="15"/>
+            <decision x="575.0" y="300.0" id="19">
+                <expression>(&lt;=  diff (* -2. (asin 1.) ))</expression>
+            </decision>
+            <line from-pt="1" to-pt="3" from-id="8" to-id="19" id="20">
+                <expression>NIL</expression>
+            </line>
+            <process x="575.0" y="450.0" id="21">
+                <expression>(setf diff (+ diff (* 4. (asin 1.) )))</expression>
+            </process>
+            <line from-pt="2" to-pt="0" from-id="19" to-id="21" id="22">
+                <expression>T</expression>
+            </line>
+            <line from-pt="2" to-pt="0" from-id="21" to-id="1" id="23"/>
+            <line from-pt="1" to-pt="1" from-id="19" to-id="1" id="24">
+                <expression>NIL</expression>
+            </line>
+        </elements>
+    </subchart>
+</flowchart>

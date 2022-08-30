@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<main-model>
+    <inputMap>
+        <entry>
+            <key main-signal-name="connected" sub-signal-name="out"/>
+            <value path="sim1.cfg" index="connected" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="enable" sub-signal-name="out"/>
+            <value path="sim1.cfg" index="enabled" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="v1" sub-signal-name="out"/>
+            <value path="sim1.cfg" index="v1" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="v2" sub-signal-name="out"/>
+            <value path="sim1.cfg" index="v2" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="v3" sub-signal-name="out"/>
+            <value path="sim1.cfg" index="v3" startTime="0"/>
+        </entry>
+    </inputMap>
+    <outputMap>
+        <entry>
+            <key main-signal-name="connected" sub-signal-name="out"/>
+            <value index="connected" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="enable" sub-signal-name="out"/>
+            <value index="enabled" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="v1" sub-signal-name="out"/>
+            <value index="v1" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="v2" sub-signal-name="out"/>
+            <value index="v2" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="v3" sub-signal-name="out"/>
+            <value index="v3" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="VdeFrt" sub-signal-name="u_max"/>
+            <value index="u_max" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="VdeFrt" sub-signal-name="u_min"/>
+            <value index="u_min" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="VdeFrt" sub-signal-name="mode_normal"/>
+            <value index="mode_normal" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="VdeFrt" sub-signal-name="mode_flt_requirement"/>
+            <value index="mode_flt_requirement" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="VdeFrt" sub-signal-name="mode_flt_no_req"/>
+            <value index="mode_flt_no_req" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="VdeFrt" sub-signal-name="mode_flt_disconnect"/>
+            <value index="mode_flt_disconnect" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="VdeFrt" sub-signal-name="is_sym_flt"/>
+            <value index="is_sym_flt" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="VdeFrt" sub-signal-name="limit_lvrt"/>
+            <value index="limit_lvrt" startTime="0"/>
+        </entry>
+        <entry>
+            <key main-signal-name="VdeFrt" sub-signal-name="limit_hvrt"/>
+            <value index="limit_hvrt" startTime="0"/>
+        </entry>
+    </outputMap>
+    <sim-duration>20.0</sim-duration>
+    <library-path>..\monitors.jar</library-path>
+    <station>
+        <name>ExampleStation</name>
+    </station>
+    <ext-config>
+        <process-categories>
+            <category name="Gridcode">
+                <templates>
+                    <template id="VDE-FRT" name="VdeFrt">
+                        <instances>
+                            <instance id="10441bcd-1dba-43f7-8308-e394d23027ff" name="VdeFrt" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="connected" inverted="false">
+        <signal-reference main-signal-name="0fb1e3d9-c44c-4858-b244-0d12c9248e39" sub-signal-name="out">
+            <boolean-type/>
+        </signal-reference>
+    </binding>
+    <binding name="enabled" inverted="false">
+        <signal-reference main-signal-name="aa74a556-473e-4a6b-beff-2bc890965ff8" sub-signal-name="out">
+            <boolean-type/>
+        </signal-reference>
+    </binding>
+    <binding name="u_1" inverted="false">
+        <signal-reference main-signal-name="46c8c3c4-842c-402a-ba1b-9fb94284f53d" sub-signal-name="out">
+            <base-type unit="VOLT" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="u_2" inverted="false">
+        <signal-reference main-signal-name="81ffb83b-bb75-4bec-b098-9d4928c2991f" sub-signal-name="out">
+            <base-type unit="VOLT" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="u_3" inverted="false">
+        <signal-reference main-signal-name="4b5d6d85-2f43-4bff-9322-e51bcc6ae09a" sub-signal-name="out">
+            <base-type unit="VOLT" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="u_ref" inverted="false">
+        <constant-expression>
+            <value>
+                <tagged-value>
+                    <base-type unit="VOLT" prefix="NONE"/>
+                    <real value="100.0"/>
+                </tagged-value>
+            </value>
+        </constant-expression>
+    </binding>
+    <binding name="u_max" inverted="false">
+        <output-signal-reference main-signal-name="10441bcd-1dba-43f7-8308-e394d23027ff" sub-signal-name="u_max">
+            <base-type unit="VOLT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="u_min" inverted="false">
+        <output-signal-reference main-signal-name="10441bcd-1dba-43f7-8308-e394d23027ff" sub-signal-name="u_min">
+            <base-type unit="VOLT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="mode_normal" inverted="false">
+        <output-signal-reference main-signal-name="10441bcd-1dba-43f7-8308-e394d23027ff" sub-signal-name="mode_normal">
+            <boolean-type/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="mode_flt_requirement" inverted="false">
+        <output-signal-reference main-signal-name="10441bcd-1dba-43f7-8308-e394d23027ff" sub-signal-name="mode_flt_requirement">
+            <boolean-type/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="mode_flt_no_req" inverted="false">
+        <output-signal-reference main-signal-name="10441bcd-1dba-43f7-8308-e394d23027ff" sub-signal-name="mode_flt_no_req">
+            <boolean-type/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="mode_flt_disconnect" inverted="false">
+        <output-signal-reference main-signal-name="10441bcd-1dba-43f7-8308-e394d23027ff" sub-signal-name="mode_flt_disconnect">
+            <boolean-type/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="is_sym_flt" inverted="false">
+        <output-signal-reference main-signal-name="10441bcd-1dba-43f7-8308-e394d23027ff" sub-signal-name="is_sym_flt">
+            <boolean-type/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="limit_lvrt" inverted="false">
+        <output-signal-reference main-signal-name="10441bcd-1dba-43f7-8308-e394d23027ff" sub-signal-name="limit_lvrt">
+            <base-type unit="VOLT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="limit_hvrt" inverted="false">
+        <output-signal-reference main-signal-name="10441bcd-1dba-43f7-8308-e394d23027ff" sub-signal-name="limit_hvrt">
+            <base-type unit="VOLT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="limit_norm_low" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="PERCENT" prefix="NONE"/>
+                <real value="90.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="limit_norm_high" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="PERCENT" prefix="NONE"/>
+                <real value="110.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="limit_lvrt_sym" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <list-type>
+                    <product-type>
+                        <base-type unit="SECOND" prefix="NONE"/>
+                        <base-type unit="PERCENT" prefix="NONE"/>
+                    </product-type>
+                </list-type>
+                <list>
+                    <list>
+                        <real value="0.0"/>
+                        <real value="0.0"/>
+                    </list>
+                    <list>
+                        <real value="0.15"/>
+                        <real value="0.0"/>
+                    </list>
+                    <list>
+                        <real value="0.15"/>
+                        <real value="25.0"/>
+                    </list>
+                    <list>
+                        <real value="0.3"/>
+                        <real value="70.0"/>
+                    </list>
+                    <list>
+                        <real value="0.5"/>
+                        <real value="70.0"/>
+                    </list>
+                    <list>
+                        <real value="1.5"/>
+                        <real value="85.0"/>
+                    </list>
+                </list>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="limit_lvrt_asym" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <list-type>
+                    <product-type>
+                        <base-type unit="SECOND" prefix="NONE"/>
+                        <base-type unit="PERCENT" prefix="NONE"/>
+                    </product-type>
+                </list-type>
+                <list>
+                    <list>
+                        <real value="0.0"/>
+                        <real value="0.0"/>
+                    </list>
+                    <list>
+                        <real value="0.22"/>
+                        <real value="0.0"/>
+                    </list>
+                    <list>
+                        <real value="0.22"/>
+                        <real value="30.0"/>
+                    </list>
+                    <list>
+                        <real value="0.45"/>
+                        <real value="60.0"/>
+                    </list>
+                    <list>
+                        <real value="0.6"/>
+                        <real value="60.0"/>
+                    </list>
+                    <list>
+                        <real value="1.5"/>
+                        <real value="75.0"/>
+                    </list>
+                    <list>
+                        <real value="3.0"/>
+                        <real value="75.0"/>
+                    </list>
+                    <list>
+                        <real value="3.0"/>
+                        <real value="85.0"/>
+                    </list>
+                </list>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="limit_hvrt_rel" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <list-type>
+                    <product-type>
+                        <base-type unit="SECOND" prefix="NONE"/>
+                        <base-type unit="PERCENT" prefix="NONE"/>
+                    </product-type>
+                </list-type>
+                <list>
+                    <list>
+                        <real value="0.0"/>
+                        <real value="25.0"/>
+                    </list>
+                    <list>
+                        <real value="0.1"/>
+                        <real value="25.0"/>
+                    </list>
+                    <list>
+                        <real value="0.1"/>
+                        <real value="15.0"/>
+                    </list>
+                    <list>
+                        <real value="60.0"/>
+                        <real value="15.0"/>
+                    </list>
+                    <list>
+                        <real value="60.0"/>
+                        <real value="10.0"/>
+                    </list>
+                </list>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="limit_hvrt_abs" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <list-type>
+                    <product-type>
+                        <base-type unit="SECOND" prefix="NONE"/>
+                        <base-type unit="PERCENT" prefix="NONE"/>
+                    </product-type>
+                </list-type>
+                <list>
+                    <list>
+                        <real value="0.0"/>
+                        <real value="130.0"/>
+                    </list>
+                    <list>
+                        <real value="0.1"/>
+                        <real value="130.0"/>
+                    </list>
+                    <list>
+                        <real value="0.1"/>
+                        <real value="125.0"/>
+                    </list>
+                    <list>
+                        <real value="60.0"/>
+                        <real value="125.0"/>
+                    </list>
+                    <list>
+                        <real value="60.0"/>
+                        <real value="115.0"/>
+                    </list>
+                </list>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="flt_timeout" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="SECOND" prefix="NONE"/>
+                <real value="5.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                        </instances>
+                    </template>
+                </templates>
+            </category>
+            <category name="Signal Generators">
+                <templates>
+                    <template id="COMTRADEGEN_ANALOG" name="Comtrade Analog Signal Generator">
+                        <instances>
+                            <instance id="4b5d6d85-2f43-4bff-9322-e51bcc6ae09a" name="v3" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="out" inverted="false">
+        <output-signal-reference main-signal-name="4b5d6d85-2f43-4bff-9322-e51bcc6ae09a" sub-signal-name="out">
+            <base-type unit="VOLT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings/>
+                            </instance>
+                            <instance id="46c8c3c4-842c-402a-ba1b-9fb94284f53d" name="v1" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="out" inverted="false">
+        <output-signal-reference main-signal-name="46c8c3c4-842c-402a-ba1b-9fb94284f53d" sub-signal-name="out">
+            <base-type unit="VOLT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings/>
+                            </instance>
+                            <instance id="81ffb83b-bb75-4bec-b098-9d4928c2991f" name="v2" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="out" inverted="false">
+        <output-signal-reference main-signal-name="81ffb83b-bb75-4bec-b098-9d4928c2991f" sub-signal-name="out">
+            <base-type unit="VOLT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings/>
+                            </instance>
+                        </instances>
+                    </template>
+                    <template id="COMTRADEGEN_DIGITAL" name="Comtrade Digital Signal Generator">
+                        <instances>
+                            <instance id="aa74a556-473e-4a6b-beff-2bc890965ff8" name="enable" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="out" inverted="false">
+        <output-signal-reference main-signal-name="aa74a556-473e-4a6b-beff-2bc890965ff8" sub-signal-name="out">
+            <boolean-type/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings/>
+                            </instance>
+                            <instance id="0fb1e3d9-c44c-4858-b244-0d12c9248e39" name="connected" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="out" inverted="false">
+        <output-signal-reference main-signal-name="0fb1e3d9-c44c-4858-b244-0d12c9248e39" sub-signal-name="out">
+            <boolean-type/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings/>
+                            </instance>
+                        </instances>
+                    </template>
+                </templates>
+            </category>
+            <category name="Standard">
+                <templates/>
+            </category>
+            <category name="Utilities">
+                <templates/>
+            </category>
+        </process-categories>
+        <signal-infos>
+            <signal-info name="Signal Reference #1">
+                <nominal-values>
+                    <nominal-value unit="HERTZ" value="50.0"/>
+                    <nominal-value unit="VOLT" value="200.0"/>
+                </nominal-values>
+            </signal-info>
+        </signal-infos>
+    </ext-config>
+    <sourceMap>
+        <entry>
+            <key>VDE-FRT</key>
+            <value>vde-frt.flx</value>
+        </entry>
+    </sourceMap>
+</main-model>

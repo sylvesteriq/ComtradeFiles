@@ -1,0 +1,44 @@
+[PFM300 General]
+timezone=W. Europe Standard Time
+utcOffset=0
+timeFracsecBase=10000000
+[PFM300 Trigger1]
+type=GCC_START
+timeSoc=1586963724
+timeFracsec=0
+timeFracsecRaw=0
+utcOffset=0
+id=1775428631
+signalName=VdeFrt
+gccGroupId=-133356301
+message=HVRT started
+[PFM300 Trigger2]
+type=GCC_INFO
+timeSoc=1586963724
+timeFracsec=0
+timeFracsecRaw=0
+utcOffset=0
+id=669844443
+signalName=VdeFrt
+gccGroupId=-133356301
+message=Relative limit for high voltage violated, generator must not meet further requirements
+[PFM300 Trigger3]
+type=GCC_INFO
+timeSoc=1586963727
+timeFracsec=0
+timeFracsecRaw=0
+utcOffset=0
+id=1791103220
+signalName=VdeFrt
+gccGroupId=-133356301
+message=Limit violated during HVRT, generator is allowed to disconnect
+[PFM300 Trigger4]
+type=GCC_END_SUCCESS
+timeSoc=1586963728
+timeFracsec=0
+timeFracsecRaw=0
+utcOffset=0
+id=1066343685
+signalName=VdeFrt
+gccGroupId=-133356301
+message=Regular generator disconnect during HVRT

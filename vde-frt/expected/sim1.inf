@@ -1,0 +1,34 @@
+[PFM300 General]
+timezone=W. Europe Standard Time
+utcOffset=0
+timeFracsecBase=10000000
+[PFM300 Trigger1]
+type=GCC_START
+timeSoc=1586879790
+timeFracsec=0
+timeFracsecRaw=0
+utcOffset=0
+id=844723002
+signalName=VdeFrt
+gccGroupId=-33377106
+message=LVRT started
+[PFM300 Trigger2]
+type=GCC_INFO
+timeSoc=1586879793
+timeFracsec=0
+timeFracsecRaw=0
+utcOffset=0
+id=1911779475
+signalName=VdeFrt
+gccGroupId=-33377106
+message=Limit violated during LVRT, generator is allowed to disconnect
+[PFM300 Trigger3]
+type=GCC_END_SUCCESS
+timeSoc=1586879794
+timeFracsec=0
+timeFracsecRaw=0
+utcOffset=0
+id=220568598
+signalName=VdeFrt
+gccGroupId=-33377106
+message=Regular generator disconnect during LVRT

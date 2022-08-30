@@ -1,0 +1,27 @@
+[PFM300 General]
+firmwareVersion=1.4.0.4
+timezone=E. Australia Standard Time
+utcOffset=36000
+timeFracsecBase=10000000
+maxTimeAccuracyReduction=0
+[PFM300 Trigger1]
+type=Manual
+timeSoc=1661304449
+timeFracsec=860
+timeFracsecRaw=8600010
+utcOffset=36000
+threshold=
+thresholdUnit=
+id=156458729963137
+signalName=
+measureName=
+pqEventId=0
+gccGroupId=0
+[PFM300 ChannelDescriptions]
+header=Name;Primary Measure Type;Signal Name;Phase;Postfix;Unit
+An_1=U Sig (a);U;Sig;a;;V
+An_2=U Sig (b);U;Sig;b;;V
+An_3=U Sig (c);U;Sig;c;;V
+An_4=I Sig (a);I;Sig;a;;A
+An_5=I Sig (b);I;Sig;b;;A
+An_6=I Sig (c);I;Sig;c;;A

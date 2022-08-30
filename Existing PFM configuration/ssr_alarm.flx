@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<flowchart name="ssr_alarm" revision="2239">
+    <properties name="ssr_alarm" category="SSR" description="" version="0.1" release-notes=""/>
+    <parameters>
+        <parameter name="threshold" type=":analog" value="1" description="Level at which signal input will generate a trigger event if above. Units are V, W or VAR depending on the signal configured in the monitor."/>
+        <parameter name="sample_time" type="s" value="0.01" description="Sample rate in seconds (100Hz/0.01s default)"/>
+        <parameter name="sig_watch" type="s" value="10" description="Time in seconds amplitude signal needs to be ABOVE threshold before triggering"/>
+        <parameter name="under_watch" type="s" value="100" description="Time in seconds amplitude signal needs to be BELOW threshold to not triggering"/>
+        <parameter name="new_trigger_wait" type="s" value="200" description="Time in seconds a new trigger is allowed to happen"/>
+    </parameters>
+    <variables>
+        <variable name="amplitude_1" type=":analog" mode="IN" description="Amplitude signal from &lt;Single Frequency DFT&gt; monitor Frequency 1"/>
+        <variable name="amplitude_2" type=":analog" mode="IN" description="Amplitude signal from &lt;Single Frequency DFT&gt; monitor Frequency 2"/>
+        <variable name="amplitude_3" type=":analog" mode="IN" description="Amplitude signal from &lt;Single Frequency DFT&gt; monitor Frequency 3"/>
+        <variable name="amplitude_4" type=":analog" mode="IN" description="Amplitude signal from &lt;Single Frequency DFT&gt; monitor Frequency 4"/>
+        <variable name="trigger_event" type=":digital" mode="OUT" description="TRUE if a trigger Event has started."/>
+    </variables>
+    <state-variables>
+        <state-variable name="amplitude_event_1" initial-value="NIL"/>
+        <state-variable name="amplitude_event_2" initial-value="NIL"/>
+        <state-variable name="amplitude_event_3" initial-value="NIL"/>
+        <state-variable name="amplitude_event_4" initial-value="NIL"/>
+        <state-variable name="trigger_event" initial-value="NIL"/>
+        <state-variable name="under_count_1" initial-value="0"/>
+        <state-variable name="under_count_2" initial-value="0"/>
+        <state-variable name="under_count_3" initial-value="0"/>
+        <state-variable name="under_count_4" initial-value="0"/>
+        <state-variable name="new_trigger_count_1" initial-value="0"/>
+        <state-variable name="new_trigger_count_2" initial-value="0"/>
+        <state-variable name="new_trigger_count_3" initial-value="0"/>
+        <state-variable name="new_trigger_count_4" initial-value="0"/>
+        <state-variable name="sig_watch_count_1" initial-value="0"/>
+        <state-variable name="sig_watch_count_2" initial-value="0"/>
+        <state-variable name="sig_watch_count_3" initial-value="0"/>
+        <state-variable name="sig_watch_count_4" initial-value="0"/>
+    </state-variables>
+    <subchart x="0.0" y="0.0" id="-1">
+        <expression>ROOT</expression>
+        <elements>
+            <subchart x="2500.0" y="800.0" id="185">
+                <expression>Trigger_handler</expression>
+                <elements>
+                    <state x="2325.0" y="50.0" id="191">
+                        <expression>TO_END</expression>
+                    </state>
+                    <state x="2325.0" y="-325.0" id="186">
+                        <expression>START</expression>
+                    </state>
+                    <decision x="2050.0" y="0.0" id="219">
+                        <expression>( or amplitude_event_1 amplitude_event_2 amplitude_event_3 amplitude_event_4)</expression>
+                    </decision>
+                    <process x="2050.0" y="150.0" id="222">
+                        <expression>(setf trigger_event T)
+(start-event "Amplitude Trigger Event" T)</expression>
+                    </process>
+                    <line from-pt="2" to-pt="0" from-id="219" to-id="222" id="223">
+                        <expression>T</expression>
+                    </line>
+                    <decision x="2450.0" y="0.0" id="227">
+                        <expression>(and (not amplitude_event_1) (not amplitude_event_2) (not amplitude_event_3) (not amplitude_event_4))</expression>
+                    </decision>
+                    <process x="2450.0" y="150.0" id="226">
+                        <expression>(setf trigger_event NIL)
+(end-event T "Amplitud Event ended" NIL)</expression>
+                    </process>
+                    <line from-pt="2" to-pt="0" from-id="227" to-id="226" id="230">
+                        <expression>T</expression>
+                    </line>
+                    <decision x="2250.0" y="-225.0" id="233">
+                        <expression>trigger_event</expression>
+                    </decision>
+                    <line from-pt="1" to-pt="3" from-id="219" to-id="191" id="270">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="3" to-pt="1" from-id="227" to-id="191" id="271">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="3" to-pt="2" from-id="226" to-id="191" id="272"/>
+                    <line from-pt="1" to-pt="2" from-id="222" to-id="191" id="273"/>
+                    <line from-pt="1" to-pt="0" from-id="233" to-id="227" id="276">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="3" to-pt="0" from-id="233" to-id="219" id="277">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="186" to-id="233" id="670"/>
+                </elements>
+            </subchart>
+            <state x="2775.0" y="850.0" id="267">
+                <expression>END</expression>
+            </state>
+            <subchart x="1500.0" y="800.0" id="413">
+                <expression>Amplitude_1</expression>
+                <elements>
+                    <state x="650.0" y="125.0" id="322">
+                        <expression>START</expression>
+                    </state>
+                    <decision x="575.0" y="875.0" id="291">
+                        <expression>(&gt;= sig_watch_count_1 sig_watch)</expression>
+                    </decision>
+                    <state x="1300.0" y="425.0" id="283">
+                        <expression>CONTINUE</expression>
+                    </state>
+                    <decision x="1000.0" y="575.0" id="414">
+                        <expression>(&gt;= under_count_1 under_watch )</expression>
+                    </decision>
+                    <process x="575.0" y="725.0" id="288">
+                        <expression>(setf under_count_1 0)
+(setf sig_watch_count_1 ( + sig_watch_count_1 sample_time))</expression>
+                    </process>
+                    <process x="800.0" y="225.0" id="280">
+                        <expression>(setf new_trigger_count_1 (+ new_trigger_count_1 sample_time))</expression>
+                    </process>
+                    <process x="1000.0" y="725.0" id="289">
+                        <expression>(setf sig_watch_count_1 0)
+(setf under_count_1 0)</expression>
+                    </process>
+                    <process x="800.0" y="575.0" id="285">
+                        <expression>(setf under_count_1 (+ under_count_1 sample_time))</expression>
+                    </process>
+                    <process x="1000.0" y="375.0" id="282">
+                        <expression>(setf new_trigger_count_1 0)
+(setf amplitude_event_1 NIL)
+(end-event T "Amplitud Event Freq1 ended" NIL)</expression>
+                    </process>
+                    <decision x="1000.0" y="225.0" id="281">
+                        <expression>(&gt;= new_trigger_count_1 new_trigger_wait )</expression>
+                    </decision>
+                    <state x="1075.0" y="925.0" id="290">
+                        <expression>CONTINUE</expression>
+                    </state>
+                    <process x="575.0" y="1025.0" id="292">
+                        <expression>(setf sig_watch_count_1 0)
+(setf amplitude_event_1 T)
+(start-event "Amplitude Event Freq1" NIL)</expression>
+                    </process>
+                    <decision x="575.0" y="575.0" id="287">
+                        <expression>( &gt;= amplitude_1 threshold)</expression>
+                    </decision>
+                    <decision x="575.0" y="225.0" id="279">
+                        <expression>trigger_event
+</expression>
+                    </decision>
+                    <line from-pt="1" to-pt="3" from-id="291" to-id="290" id="349">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="291" to-id="292" id="350">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="2" from-id="414" to-id="283" id="359">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="414" to-id="289" id="360">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="288" to-id="291" id="361"/>
+                    <line from-pt="1" to-pt="3" from-id="280" to-id="281" id="364"/>
+                    <line from-pt="2" to-pt="0" from-id="289" to-id="290" id="365"/>
+                    <line from-pt="1" to-pt="3" from-id="285" to-id="414" id="370"/>
+                    <line from-pt="1" to-pt="3" from-id="282" to-id="283" id="380"/>
+                    <line from-pt="1" to-pt="0" from-id="281" to-id="283" id="381">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="281" to-id="282" id="382">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="287" to-id="285" id="395">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="287" to-id="288" id="396">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="279" to-id="280" id="404">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="322" to-id="279" id="406"/>
+                    <line from-pt="1" to-pt="2" from-id="292" to-id="290" id="409"/>
+                    <line from-pt="2" to-pt="0" from-id="279" to-id="287" id="673">
+                        <expression>NIL</expression>
+                    </line>
+                </elements>
+            </subchart>
+            <line from-pt="1" to-pt="3" from-id="185" to-id="267" id="422">
+                <expression>TO_END</expression>
+            </line>
+            <state x="1400.0" y="850.0" id="424">
+                <expression>START</expression>
+            </state>
+            <line from-pt="1" to-pt="3" from-id="424" to-id="413" id="425"/>
+            <subchart x="1750.0" y="800.0" id="564">
+                <expression>Amplitude_2</expression>
+                <elements>
+                    <state x="1625.0" y="700.0" id="565">
+                        <expression>START</expression>
+                    </state>
+                    <process x="1975.0" y="950.0" id="569">
+                        <expression>(setf new_trigger_count_2 0)
+(setf amplitude_event_2 NIL)
+(end-event T "Amplitud Event Freq2 ended" NIL)</expression>
+                    </process>
+                    <decision x="1550.0" y="800.0" id="566">
+                        <expression>trigger_event
+</expression>
+                    </decision>
+                    <process x="1775.0" y="800.0" id="567">
+                        <expression>(setf new_trigger_count_2 (+ new_trigger_count_2 sample_time))</expression>
+                    </process>
+                    <decision x="1550.0" y="1125.0" id="573">
+                        <expression>( &gt;= amplitude_2 threshold)</expression>
+                    </decision>
+                    <decision x="1975.0" y="1125.0" id="571">
+                        <expression>(&gt;= under_count_2 under_watch )</expression>
+                    </decision>
+                    <process x="1975.0" y="1275.0" id="576">
+                        <expression>(setf sig_watch_count_2 0)
+(setf under_count_2 0)</expression>
+                    </process>
+                    <process x="1550.0" y="1575.0" id="579">
+                        <expression>(setf sig_watch_count_2 0)
+(setf amplitude_event_2 T)
+(start-event "Amplitude Event Freq2" NIL)</expression>
+                    </process>
+                    <process x="1550.0" y="1275.0" id="575">
+                        <expression>(setf under_count_2 0)
+(setf sig_watch_count_2 ( + sig_watch_count_2 sample_time))</expression>
+                    </process>
+                    <state x="2050.0" y="1475.0" id="577">
+                        <expression>CONTINUE</expression>
+                    </state>
+                    <process x="1775.0" y="1125.0" id="572">
+                        <expression>(setf under_count_2 (+ under_count_2 sample_time))</expression>
+                    </process>
+                    <decision x="1550.0" y="1425.0" id="578">
+                        <expression>(&gt;= sig_watch_count_2 sig_watch)</expression>
+                    </decision>
+                    <state x="2275.0" y="1000.0" id="570">
+                        <expression>CONTINUE</expression>
+                    </state>
+                    <decision x="1975.0" y="800.0" id="568">
+                        <expression>(&gt;= new_trigger_count_2 new_trigger_wait )</expression>
+                    </decision>
+                    <line from-pt="2" to-pt="0" from-id="565" to-id="566" id="580"/>
+                    <line from-pt="1" to-pt="3" from-id="569" to-id="570" id="581"/>
+                    <line from-pt="1" to-pt="3" from-id="566" to-id="567" id="582">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="567" to-id="568" id="585"/>
+                    <line from-pt="1" to-pt="3" from-id="573" to-id="572" id="586">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="573" to-id="575" id="587">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="2" from-id="571" to-id="570" id="588">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="571" to-id="576" id="589">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="576" to-id="577" id="590"/>
+                    <line from-pt="1" to-pt="2" from-id="579" to-id="577" id="591"/>
+                    <line from-pt="2" to-pt="0" from-id="575" to-id="578" id="592"/>
+                    <line from-pt="1" to-pt="3" from-id="572" to-id="571" id="593"/>
+                    <line from-pt="1" to-pt="3" from-id="578" to-id="577" id="594">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="578" to-id="579" id="595">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="0" from-id="568" to-id="570" id="596">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="568" to-id="569" id="597">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="566" to-id="573" id="674">
+                        <expression>NIL</expression>
+                    </line>
+                </elements>
+            </subchart>
+            <subchart x="2000.0" y="800.0" id="671">
+                <expression>Amplitude_3</expression>
+                <elements>
+                    <process x="1775.0" y="1075.0" id="672">
+                        <expression>(setf sig_watch_count_3 0)
+(setf amplitude_event_3 T)
+(start-event "Amplitude Event Freq3" NIL)</expression>
+                    </process>
+                    <state x="2275.0" y="975.0" id="599">
+                        <expression>CONTINUE</expression>
+                    </state>
+                    <process x="2200.0" y="450.0" id="606">
+                        <expression>(setf new_trigger_count_3 0)
+(setf amplitude_event_3 NIL)
+(end-event T "Amplitud Event Freq3 ended" NIL)</expression>
+                    </process>
+                    <decision x="1775.0" y="625.0" id="603">
+                        <expression>( &gt;= amplitude_3 threshold)</expression>
+                    </decision>
+                    <state x="2500.0" y="500.0" id="607">
+                        <expression>CONTINUE</expression>
+                    </state>
+                    <decision x="2200.0" y="300.0" id="608">
+                        <expression>(&gt;= new_trigger_count_3 new_trigger_wait )</expression>
+                    </decision>
+                    <process x="2200.0" y="775.0" id="600">
+                        <expression>(setf sig_watch_count_3 0)
+(setf under_count_3 0)</expression>
+                    </process>
+                    <decision x="1775.0" y="925.0" id="601">
+                        <expression>(&gt;= sig_watch_count_3 sig_watch)</expression>
+                    </decision>
+                    <process x="2000.0" y="625.0" id="604">
+                        <expression>(setf under_count_3 (+ under_count_3 sample_time))</expression>
+                    </process>
+                    <decision x="1775.0" y="300.0" id="610">
+                        <expression>trigger_event
+</expression>
+                    </decision>
+                    <process x="2000.0" y="300.0" id="609">
+                        <expression>(setf new_trigger_count_3 (+ new_trigger_count_3 sample_time))</expression>
+                    </process>
+                    <decision x="2200.0" y="625.0" id="605">
+                        <expression>(&gt;= under_count_3 under_watch )</expression>
+                    </decision>
+                    <state x="1850.0" y="200.0" id="612">
+                        <expression>START</expression>
+                    </state>
+                    <process x="1775.0" y="775.0" id="602">
+                        <expression>(setf under_count_3 0)
+(setf sig_watch_count_3 ( + sig_watch_count_3 sample_time))</expression>
+                    </process>
+                    <line from-pt="1" to-pt="2" from-id="672" to-id="599" id="613"/>
+                    <line from-pt="1" to-pt="3" from-id="606" to-id="607" id="614"/>
+                    <line from-pt="1" to-pt="3" from-id="603" to-id="604" id="615">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="603" to-id="602" id="616">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="0" from-id="608" to-id="607" id="617">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="608" to-id="606" id="618">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="600" to-id="599" id="619"/>
+                    <line from-pt="1" to-pt="3" from-id="601" to-id="599" id="621">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="601" to-id="672" id="622">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="604" to-id="605" id="623"/>
+                    <line from-pt="1" to-pt="3" from-id="610" to-id="609" id="624">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="609" to-id="608" id="626"/>
+                    <line from-pt="1" to-pt="2" from-id="605" to-id="607" id="627">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="605" to-id="600" id="628">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="612" to-id="610" id="629"/>
+                    <line from-pt="2" to-pt="0" from-id="602" to-id="601" id="630"/>
+                    <line from-pt="2" to-pt="0" from-id="610" to-id="603" id="675">
+                        <expression>NIL</expression>
+                    </line>
+                </elements>
+            </subchart>
+            <subchart x="2250.0" y="800.0" id="631">
+                <expression>Amplitude_4</expression>
+                <elements>
+                    <process x="2300.0" y="1275.0" id="646">
+                        <expression>(setf sig_watch_count_4 0)
+(setf under_count_4 0)</expression>
+                    </process>
+                    <state x="2375.0" y="1475.0" id="645">
+                        <expression>CONTINUE</expression>
+                    </state>
+                    <decision x="1875.0" y="1425.0" id="643">
+                        <expression>(&gt; sig_watch_count_4 sig_watch)</expression>
+                    </decision>
+                    <process x="2100.0" y="775.0" id="634">
+                        <expression>(setf new_trigger_count_4 (+ new_trigger_count_4 sample_time))</expression>
+                    </process>
+                    <decision x="1875.0" y="1125.0" id="640">
+                        <expression>( &gt;= amplitude_4 threshold)</expression>
+                    </decision>
+                    <state x="1950.0" y="675.0" id="632">
+                        <expression>START</expression>
+                    </state>
+                    <decision x="1875.0" y="775.0" id="633">
+                        <expression>trigger_event
+</expression>
+                    </decision>
+                    <process x="2300.0" y="925.0" id="636">
+                        <expression>(setf new_trigger_count_4 0)
+(setf amplitude_event_4 NIL)
+(end-event T "Amplitud Event Freq4 ended" NIL)</expression>
+                    </process>
+                    <decision x="2300.0" y="1125.0" id="638">
+                        <expression>(&gt;= under_count_4 under_watch )</expression>
+                    </decision>
+                    <process x="1875.0" y="1575.0" id="644">
+                        <expression>(setf sig_watch_count_4 0)
+(setf amplitude_event_4 T)
+(start-event "Amplitude Event Freq4" NIL)</expression>
+                    </process>
+                    <state x="2600.0" y="975.0" id="637">
+                        <expression>CONTINUE</expression>
+                    </state>
+                    <process x="1875.0" y="1275.0" id="642">
+                        <expression>(setf under_count_4 0)
+(setf sig_watch_count_4 ( + sig_watch_count_4 sample_time))</expression>
+                    </process>
+                    <decision x="2300.0" y="775.0" id="635">
+                        <expression>(&gt;= new_trigger_count_4 new_trigger_wait )</expression>
+                    </decision>
+                    <process x="2100.0" y="1125.0" id="639">
+                        <expression>(setf under_count_4 (+ under_count_4 sample_time))</expression>
+                    </process>
+                    <line from-pt="2" to-pt="0" from-id="646" to-id="645" id="647"/>
+                    <line from-pt="1" to-pt="3" from-id="643" to-id="645" id="648">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="643" to-id="644" id="649">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="634" to-id="635" id="650"/>
+                    <line from-pt="1" to-pt="3" from-id="640" to-id="639" id="651">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="640" to-id="642" id="652">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="632" to-id="633" id="653"/>
+                    <line from-pt="1" to-pt="3" from-id="633" to-id="634" id="654">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="636" to-id="637" id="656"/>
+                    <line from-pt="1" to-pt="2" from-id="638" to-id="637" id="657">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="638" to-id="646" id="658">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="2" from-id="644" to-id="645" id="659"/>
+                    <line from-pt="2" to-pt="0" from-id="642" to-id="643" id="661"/>
+                    <line from-pt="1" to-pt="0" from-id="635" to-id="637" id="662">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="635" to-id="636" id="663">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="639" to-id="638" id="664"/>
+                    <line from-pt="2" to-pt="0" from-id="633" to-id="640" id="676">
+                        <expression>NIL</expression>
+                    </line>
+                </elements>
+            </subchart>
+            <line from-pt="1" to-pt="3" from-id="413" to-id="564" id="666">
+                <expression>CONTINUE</expression>
+            </line>
+            <line from-pt="1" to-pt="3" from-id="564" to-id="671" id="667">
+                <expression>CONTINUE</expression>
+            </line>
+            <line from-pt="1" to-pt="3" from-id="671" to-id="631" id="668">
+                <expression>CONTINUE</expression>
+            </line>
+            <line from-pt="1" to-pt="3" from-id="631" to-id="185" id="669">
+                <expression>CONTINUE</expression>
+            </line>
+        </elements>
+    </subchart>
+</flowchart>

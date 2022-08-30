@@ -1,0 +1,1443 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<main-model>
+    <inputMap>
+        <entry>
+            <key main-signal-name="V" sub-signal-name="out"/>
+            <value path="comtrade_data_input\RMS_ssr_10_25_5_1_Hz_new.dat" index="V" startTime="0" sync="true"/>
+        </entry>
+        <entry>
+            <key main-signal-name="P" sub-signal-name="out"/>
+            <value path="comtrade_data_input\RMS_ssr_10_25_5_1_Hz_new.dat" index="P" startTime="0" sync="true"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Q" sub-signal-name="out"/>
+            <value path="comtrade_data_input\RMS_ssr_10_25_5_1_Hz_new.dat" index="Q" startTime="0" sync="true"/>
+        </entry>
+    </inputMap>
+    <outputMap>
+        <entry>
+            <key main-signal-name="Frequency detection monitor P" sub-signal-name="f1"/>
+            <value index="P_f1_2" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Frequency detection monitor P" sub-signal-name="f2"/>
+            <value index="P_f2_2" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Frequency detection monitor P" sub-signal-name="f3"/>
+            <value index="P_f3_2" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Frequency detection monitor P" sub-signal-name="f4"/>
+            <value index="P_f4_2" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Frequency detection monitor Q" sub-signal-name="f1"/>
+            <value index="Q_f1_3" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Frequency detection monitor Q" sub-signal-name="f2"/>
+            <value index="Q_f2_3" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Frequency detection monitor Q" sub-signal-name="f3"/>
+            <value index="Q_f3_3" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Frequency detection monitor Q" sub-signal-name="f4"/>
+            <value index="Q_f4_3" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Frequency detection monitor V" sub-signal-name="f1"/>
+            <value index="V_f1_1" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Frequency detection monitor V" sub-signal-name="f2"/>
+            <value index="V_f2_1" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Frequency detection monitor V" sub-signal-name="f3"/>
+            <value index="V_f3_1" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Frequency detection monitor V" sub-signal-name="f4"/>
+            <value index="V_f4_1" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Cluster" sub-signal-name="OUT1"/>
+            <value index="Cluster_f1" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Cluster" sub-signal-name="OUT2"/>
+            <value index="Cluster_f2" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Cluster" sub-signal-name="OUT3"/>
+            <value index="Cluster_f3" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Cluster" sub-signal-name="OUT4"/>
+            <value index="Cluster_f4" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="V" sub-signal-name="out"/>
+            <value index="V" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="P" sub-signal-name="out"/>
+            <value index="P" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="Q" sub-signal-name="out"/>
+            <value index="Q" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f1_V" sub-signal-name="amplitude"/>
+            <value index="f1_V_amplitude" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f1_V" sub-signal-name="phase"/>
+            <value index="f1_V_phase" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f2_Q" sub-signal-name="amplitude"/>
+            <value index="f2_Q_amplitude" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f2_Q" sub-signal-name="phase"/>
+            <value index="f2_Q_phase" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f3_V" sub-signal-name="amplitude"/>
+            <value index="f3_Vamplitude" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f3_V" sub-signal-name="phase"/>
+            <value index="f3_V_phase" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f3_P" sub-signal-name="amplitude"/>
+            <value index="f3_P_amplitude" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f3_P" sub-signal-name="phase"/>
+            <value index="f3_P_phase" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f3_Q" sub-signal-name="amplitude"/>
+            <value index="f3_Q_amplitude" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f3_Q" sub-signal-name="phase"/>
+            <value index="f3_Q_phase" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f4_V" sub-signal-name="amplitude"/>
+            <value index="f4_V__amplitude" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f4_V" sub-signal-name="phase"/>
+            <value index="f4_V_phase" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f4_P" sub-signal-name="amplitude"/>
+            <value index="f4_P_amplitude" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f4_P" sub-signal-name="phase"/>
+            <value index="f4_P_phase" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f4_Q" sub-signal-name="amplitude"/>
+            <value index="f4_Q_amplitude" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f4_Q" sub-signal-name="phase"/>
+            <value index="f4_Q_phase" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f1_P" sub-signal-name="amplitude"/>
+            <value index="f1_P_amplitude" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f1_P" sub-signal-name="phase"/>
+            <value index="f1_P_phase" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f2_V" sub-signal-name="amplitude"/>
+            <value index="f2_V_amplitude" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f2_V" sub-signal-name="phase"/>
+            <value index="f2_V_phase" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f2_P" sub-signal-name="amplitude"/>
+            <value index="f2_P_amplitude" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f2_P" sub-signal-name="phase"/>
+            <value index="f2_P_phase" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f1_Q" sub-signal-name="amplitude"/>
+            <value index="f1_Q_amplitude" startTime="0" sync="false"/>
+        </entry>
+        <entry>
+            <key main-signal-name="f1_Q" sub-signal-name="phase"/>
+            <value index="f1_Q_phase" startTime="0" sync="false"/>
+        </entry>
+    </outputMap>
+    <sim-duration>120.0</sim-duration>
+    <synchronization>HZ100</synchronization>
+    <library-path>pfm300-proc-modules-ssr-1.0.0-SNAPSHOT.jar</library-path>
+    <station/>
+    <ext-config>
+        <process-categories>
+            <category name="Examples">
+                <templates/>
+            </category>
+            <category name="SSR">
+                <templates>
+                    <template id="CLUSTER" name="Cluster">
+                        <instances>
+                            <instance id="b33c2827-5cfd-4c99-97b3-6f36be813e90" name="Cluster" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="IN1" inverted="false">
+        <signal-reference main-signal-name="e8135ff5-c097-4a07-80a9-810bcd38c730" sub-signal-name="f1">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="IN2" inverted="false">
+        <signal-reference main-signal-name="e8135ff5-c097-4a07-80a9-810bcd38c730" sub-signal-name="f2">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="IN3" inverted="false">
+        <signal-reference main-signal-name="e8135ff5-c097-4a07-80a9-810bcd38c730" sub-signal-name="f3">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="IN4" inverted="false">
+        <signal-reference main-signal-name="e8135ff5-c097-4a07-80a9-810bcd38c730" sub-signal-name="f4">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="IN5" inverted="false">
+        <signal-reference main-signal-name="470baf0d-8d4c-4445-b480-6350d60de9ea" sub-signal-name="f1">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="IN6" inverted="false">
+        <signal-reference main-signal-name="470baf0d-8d4c-4445-b480-6350d60de9ea" sub-signal-name="f2">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="IN7" inverted="false">
+        <signal-reference main-signal-name="470baf0d-8d4c-4445-b480-6350d60de9ea" sub-signal-name="f3">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="IN8" inverted="false">
+        <signal-reference main-signal-name="470baf0d-8d4c-4445-b480-6350d60de9ea" sub-signal-name="f4">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="IN9" inverted="false">
+        <signal-reference main-signal-name="1da61c9d-e6b4-4d08-8667-ba771a407068" sub-signal-name="f1">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="IN10" inverted="false">
+        <signal-reference main-signal-name="1da61c9d-e6b4-4d08-8667-ba771a407068" sub-signal-name="f2">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="IN11" inverted="false">
+        <signal-reference main-signal-name="1da61c9d-e6b4-4d08-8667-ba771a407068" sub-signal-name="f3">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="IN12" inverted="false">
+        <signal-reference main-signal-name="1da61c9d-e6b4-4d08-8667-ba771a407068" sub-signal-name="f4">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="OUT1" inverted="false">
+        <output-signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT1">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="OUT2" inverted="false">
+        <output-signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT2">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="OUT3" inverted="false">
+        <output-signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT3">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="OUT4" inverted="false">
+        <output-signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT4">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="min-size" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="2.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="max-dev" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="1.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                        </instances>
+                    </template>
+                    <template id="FREQ_DETECT_V1" name="Frequency Detection">
+                        <instances>
+                            <instance id="1da61c9d-e6b4-4d08-8667-ba771a407068" name="Frequency detection monitor V" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="in" inverted="false">
+        <signal-reference main-signal-name="c4414263-2069-4271-a9ad-c00fbaf74aa0" sub-signal-name="out">
+            <base-type unit="VOLT" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="f1" inverted="false">
+        <output-signal-reference main-signal-name="1da61c9d-e6b4-4d08-8667-ba771a407068" sub-signal-name="f1">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="f2" inverted="false">
+        <output-signal-reference main-signal-name="1da61c9d-e6b4-4d08-8667-ba771a407068" sub-signal-name="f2">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="f3" inverted="false">
+        <output-signal-reference main-signal-name="1da61c9d-e6b4-4d08-8667-ba771a407068" sub-signal-name="f3">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="f4" inverted="false">
+        <output-signal-reference main-signal-name="1da61c9d-e6b4-4d08-8667-ba771a407068" sub-signal-name="f4">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="n" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="1024.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="2.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="bins" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="5.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="snr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="2.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="df" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="0.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                            <instance id="e8135ff5-c097-4a07-80a9-810bcd38c730" name="Frequency detection monitor P" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="in" inverted="false">
+        <signal-reference main-signal-name="dccc9d51-1dff-4408-bf3c-8df260033b4a" sub-signal-name="out">
+            <base-type unit="WATT" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="f1" inverted="false">
+        <output-signal-reference main-signal-name="e8135ff5-c097-4a07-80a9-810bcd38c730" sub-signal-name="f1">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="f2" inverted="false">
+        <output-signal-reference main-signal-name="e8135ff5-c097-4a07-80a9-810bcd38c730" sub-signal-name="f2">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="f3" inverted="false">
+        <output-signal-reference main-signal-name="e8135ff5-c097-4a07-80a9-810bcd38c730" sub-signal-name="f3">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="f4" inverted="false">
+        <output-signal-reference main-signal-name="e8135ff5-c097-4a07-80a9-810bcd38c730" sub-signal-name="f4">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="n" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="1024.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="2.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="bins" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="5.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="snr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="2.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="df" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="0.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                            <instance id="470baf0d-8d4c-4445-b480-6350d60de9ea" name="Frequency detection monitor Q" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="in" inverted="false">
+        <signal-reference main-signal-name="b9cd7405-8f8d-4669-a3d0-676298017ebe" sub-signal-name="out">
+            <base-type unit="ANY" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="f1" inverted="false">
+        <output-signal-reference main-signal-name="470baf0d-8d4c-4445-b480-6350d60de9ea" sub-signal-name="f1">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="f2" inverted="false">
+        <output-signal-reference main-signal-name="470baf0d-8d4c-4445-b480-6350d60de9ea" sub-signal-name="f2">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="f3" inverted="false">
+        <output-signal-reference main-signal-name="470baf0d-8d4c-4445-b480-6350d60de9ea" sub-signal-name="f3">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="f4" inverted="false">
+        <output-signal-reference main-signal-name="470baf0d-8d4c-4445-b480-6350d60de9ea" sub-signal-name="f4">
+            <base-type unit="HERTZ" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="n" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="1024.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="2.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="bins" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="5.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="snr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="2.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="df" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="0.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                        </instances>
+                    </template>
+                    <template id="SingleFrequencyDft" name="Single Frequency Dft">
+                        <instances>
+                            <instance id="78d236e2-91c3-49ce-81c1-03474f90efa9" name="f1_V" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="value" inverted="false">
+        <signal-reference main-signal-name="c4414263-2069-4271-a9ad-c00fbaf74aa0" sub-signal-name="out">
+            <base-type unit="VOLT" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="frequency" inverted="false">
+        <signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT1">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="amplitude" inverted="false">
+        <output-signal-reference main-signal-name="78d236e2-91c3-49ce-81c1-03474f90efa9" sub-signal-name="amplitude">
+            <base-type unit="VOLT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="phase" inverted="false">
+        <output-signal-reference main-signal-name="78d236e2-91c3-49ce-81c1-03474f90efa9" sub-signal-name="phase">
+            <base-type unit="RAD" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="expansion" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="minSamples" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="fMin" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="0.1"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                            <instance id="e8142932-411a-41d5-b6d6-b20cb397ec64" name="f2_Q" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="value" inverted="false">
+        <signal-reference main-signal-name="b9cd7405-8f8d-4669-a3d0-676298017ebe" sub-signal-name="out">
+            <base-type unit="ANY" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="frequency" inverted="false">
+        <signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT2">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="amplitude" inverted="false">
+        <output-signal-reference main-signal-name="e8142932-411a-41d5-b6d6-b20cb397ec64" sub-signal-name="amplitude">
+            <base-type unit="VAR" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="phase" inverted="false">
+        <output-signal-reference main-signal-name="e8142932-411a-41d5-b6d6-b20cb397ec64" sub-signal-name="phase">
+            <base-type unit="RAD" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="expansion" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="minSamples" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="fMin" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="0.1"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                            <instance id="74590bac-ebeb-4bdc-8930-1b30679ca1a5" name="f3_V" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="value" inverted="false">
+        <signal-reference main-signal-name="c4414263-2069-4271-a9ad-c00fbaf74aa0" sub-signal-name="out">
+            <base-type unit="VOLT" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="frequency" inverted="false">
+        <signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT3">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="amplitude" inverted="false">
+        <output-signal-reference main-signal-name="74590bac-ebeb-4bdc-8930-1b30679ca1a5" sub-signal-name="amplitude">
+            <base-type unit="VOLT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="phase" inverted="false">
+        <output-signal-reference main-signal-name="74590bac-ebeb-4bdc-8930-1b30679ca1a5" sub-signal-name="phase">
+            <base-type unit="RAD" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="expansion" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="minSamples" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="fMin" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="0.1"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                            <instance id="8d4f5244-fd4b-45a9-a81b-b67bd3a33f01" name="f3_P" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="value" inverted="false">
+        <signal-reference main-signal-name="dccc9d51-1dff-4408-bf3c-8df260033b4a" sub-signal-name="out">
+            <base-type unit="WATT" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="frequency" inverted="false">
+        <signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT3">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="amplitude" inverted="false">
+        <output-signal-reference main-signal-name="8d4f5244-fd4b-45a9-a81b-b67bd3a33f01" sub-signal-name="amplitude">
+            <base-type unit="WATT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="phase" inverted="false">
+        <output-signal-reference main-signal-name="8d4f5244-fd4b-45a9-a81b-b67bd3a33f01" sub-signal-name="phase">
+            <base-type unit="RAD" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="expansion" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="minSamples" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="fMin" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="0.1"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                            <instance id="744ac139-4358-4427-8b21-31141f61ff9a" name="f3_Q" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="value" inverted="false">
+        <signal-reference main-signal-name="b9cd7405-8f8d-4669-a3d0-676298017ebe" sub-signal-name="out">
+            <base-type unit="ANY" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="frequency" inverted="false">
+        <signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT3">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="amplitude" inverted="false">
+        <output-signal-reference main-signal-name="744ac139-4358-4427-8b21-31141f61ff9a" sub-signal-name="amplitude">
+            <base-type unit="VAR" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="phase" inverted="false">
+        <output-signal-reference main-signal-name="744ac139-4358-4427-8b21-31141f61ff9a" sub-signal-name="phase">
+            <base-type unit="RAD" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="expansion" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="minSamples" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="fMin" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="0.1"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                            <instance id="8b4f26a3-455d-4703-9297-7d89160c7c71" name="f4_V" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="value" inverted="false">
+        <signal-reference main-signal-name="c4414263-2069-4271-a9ad-c00fbaf74aa0" sub-signal-name="out">
+            <base-type unit="VOLT" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="frequency" inverted="false">
+        <signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT4">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="amplitude" inverted="false">
+        <output-signal-reference main-signal-name="8b4f26a3-455d-4703-9297-7d89160c7c71" sub-signal-name="amplitude">
+            <base-type unit="VOLT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="phase" inverted="false">
+        <output-signal-reference main-signal-name="8b4f26a3-455d-4703-9297-7d89160c7c71" sub-signal-name="phase">
+            <base-type unit="RAD" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="expansion" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="minSamples" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="fMin" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="0.1"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                            <instance id="6d2f8b9b-db3a-49d6-bfe3-f3cdb58114c7" name="f4_P" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="value" inverted="false">
+        <signal-reference main-signal-name="dccc9d51-1dff-4408-bf3c-8df260033b4a" sub-signal-name="out">
+            <base-type unit="WATT" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="frequency" inverted="false">
+        <signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT4">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="amplitude" inverted="false">
+        <output-signal-reference main-signal-name="6d2f8b9b-db3a-49d6-bfe3-f3cdb58114c7" sub-signal-name="amplitude">
+            <base-type unit="WATT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="phase" inverted="false">
+        <output-signal-reference main-signal-name="6d2f8b9b-db3a-49d6-bfe3-f3cdb58114c7" sub-signal-name="phase">
+            <base-type unit="RAD" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="expansion" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="minSamples" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="fMin" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="0.1"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                            <instance id="e475df7e-b573-444d-89eb-1823be5822da" name="f4_Q" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="value" inverted="false">
+        <signal-reference main-signal-name="b9cd7405-8f8d-4669-a3d0-676298017ebe" sub-signal-name="out">
+            <base-type unit="ANY" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="frequency" inverted="false">
+        <signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT4">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="amplitude" inverted="false">
+        <output-signal-reference main-signal-name="e475df7e-b573-444d-89eb-1823be5822da" sub-signal-name="amplitude">
+            <base-type unit="VAR" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="phase" inverted="false">
+        <output-signal-reference main-signal-name="e475df7e-b573-444d-89eb-1823be5822da" sub-signal-name="phase">
+            <base-type unit="RAD" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="expansion" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="minSamples" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="fMin" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="0.1"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                            <instance id="620c6d3a-0eb9-4439-95a4-9b0f9d238c59" name="f1_P" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="value" inverted="false">
+        <signal-reference main-signal-name="dccc9d51-1dff-4408-bf3c-8df260033b4a" sub-signal-name="out">
+            <base-type unit="WATT" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="frequency" inverted="false">
+        <signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT1">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="amplitude" inverted="false">
+        <output-signal-reference main-signal-name="620c6d3a-0eb9-4439-95a4-9b0f9d238c59" sub-signal-name="amplitude">
+            <base-type unit="WATT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="phase" inverted="false">
+        <output-signal-reference main-signal-name="620c6d3a-0eb9-4439-95a4-9b0f9d238c59" sub-signal-name="phase">
+            <base-type unit="RAD" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="expansion" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="minSamples" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="fMin" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="0.1"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                            <instance id="9e688f07-074b-44b2-98a7-fa8d0ef45c50" name="f2_V" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="value" inverted="false">
+        <signal-reference main-signal-name="c4414263-2069-4271-a9ad-c00fbaf74aa0" sub-signal-name="out">
+            <base-type unit="VOLT" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="frequency" inverted="false">
+        <signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT2">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="amplitude" inverted="false">
+        <output-signal-reference main-signal-name="9e688f07-074b-44b2-98a7-fa8d0ef45c50" sub-signal-name="amplitude">
+            <base-type unit="VOLT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="phase" inverted="false">
+        <output-signal-reference main-signal-name="9e688f07-074b-44b2-98a7-fa8d0ef45c50" sub-signal-name="phase">
+            <base-type unit="RAD" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="expansion" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="minSamples" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="fMin" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="0.1"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                            <instance id="f4eada47-e007-4128-8ea2-b446c7ad5563" name="f2_P" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="value" inverted="false">
+        <signal-reference main-signal-name="dccc9d51-1dff-4408-bf3c-8df260033b4a" sub-signal-name="out">
+            <base-type unit="WATT" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="frequency" inverted="false">
+        <signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT2">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="amplitude" inverted="false">
+        <output-signal-reference main-signal-name="f4eada47-e007-4128-8ea2-b446c7ad5563" sub-signal-name="amplitude">
+            <base-type unit="WATT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="phase" inverted="false">
+        <output-signal-reference main-signal-name="f4eada47-e007-4128-8ea2-b446c7ad5563" sub-signal-name="phase">
+            <base-type unit="RAD" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="expansion" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="minSamples" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="fMin" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="0.1"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                            <instance id="9cb81c41-2877-4f70-aa4b-871f78dd8ac3" name="f1_Q" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="value" inverted="false">
+        <signal-reference main-signal-name="b9cd7405-8f8d-4669-a3d0-676298017ebe" sub-signal-name="out">
+            <base-type unit="ANY" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="frequency" inverted="false">
+        <signal-reference main-signal-name="b33c2827-5cfd-4c99-97b3-6f36be813e90" sub-signal-name="OUT1">
+            <base-type unit="HERTZ" prefix="NONE"/>
+        </signal-reference>
+    </binding>
+    <binding name="amplitude" inverted="false">
+        <output-signal-reference main-signal-name="9cb81c41-2877-4f70-aa4b-871f78dd8ac3" sub-signal-name="amplitude">
+            <base-type unit="VAR" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+    <binding name="phase" inverted="false">
+        <output-signal-reference main-signal-name="9cb81c41-2877-4f70-aa4b-871f78dd8ac3" sub-signal-name="phase">
+            <base-type unit="RAD" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings>
+    <binding name="expansion" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="minSamples" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="NONE" prefix="NONE"/>
+                <real value="20.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="sr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="cr" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="100.0"/>
+            </tagged-value>
+        </value>
+    </binding>
+    <binding name="fMin" nominal-voltage-mode="PN">
+        <value>
+            <tagged-value>
+                <base-type unit="HERTZ" prefix="NONE"/>
+                <real value="0.1"/>
+            </tagged-value>
+        </value>
+    </binding>
+</parameter-bindings>
+                            </instance>
+                        </instances>
+                    </template>
+                </templates>
+            </category>
+            <category name="Signal Generators">
+                <templates>
+                    <template id="COMTRADEGEN_ANALOG" name="Comtrade Analog Signal Generator">
+                        <instances>
+                            <instance id="c4414263-2069-4271-a9ad-c00fbaf74aa0" name="V" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="out" inverted="false">
+        <output-signal-reference main-signal-name="c4414263-2069-4271-a9ad-c00fbaf74aa0" sub-signal-name="out">
+            <base-type unit="VOLT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings/>
+                            </instance>
+                            <instance id="dccc9d51-1dff-4408-bf3c-8df260033b4a" name="P" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="out" inverted="false">
+        <output-signal-reference main-signal-name="dccc9d51-1dff-4408-bf3c-8df260033b4a" sub-signal-name="out">
+            <base-type unit="WATT" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings/>
+                            </instance>
+                            <instance id="b9cd7405-8f8d-4669-a3d0-676298017ebe" name="Q" enabled="true" stream-type="FAST" trigger-instantaneous="false" trigger-rms="false">
+<variable-bindings>
+    <binding name="out" inverted="false">
+        <output-signal-reference main-signal-name="b9cd7405-8f8d-4669-a3d0-676298017ebe" sub-signal-name="out">
+            <base-type unit="ANY" prefix="NONE"/>
+            <output-configuration enable-fast="true" enable-mon="true" enable-vis="true"/>
+        </output-signal-reference>
+    </binding>
+</variable-bindings>
+<parameter-bindings/>
+                            </instance>
+                        </instances>
+                    </template>
+                </templates>
+            </category>
+            <category name="Standard">
+                <templates/>
+            </category>
+            <category name="Utilities">
+                <templates/>
+            </category>
+        </process-categories>
+        <signal-infos/>
+    </ext-config>
+    <sourceMap>
+        <entry>
+            <key>SSR_ALARM</key>
+            <value>ssr_alarm.flx</value>
+        </entry>
+    </sourceMap>
+</main-model>

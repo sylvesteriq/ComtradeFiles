@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<flowchart name="vde-frt" revision="1846">
+    <properties name="" category="" description="This Monitor is designed to monitor the Fault Ride-Through reaction of the power plant with respect to grid code VDE-AR-N 4120:2018-11 section 10.2.3 'Dynamische Netzstuetzung'.&#10;It monitors only the grid connection state of the power plant. Use it together with VDE-IQ Monitor to also monitor reactive current control during voltage fault ride through conditions.&#10;&#10;This Monitor is also suitable for monitoring FRTs according VDE-AR-N 4110:2018-11 and VDE-AR-N 4130:2018-11." version="1.0.0" release-notes=""/>
+    <parameters>
+        <parameter name="limit_norm_low" type="%" value="90" description="Lower limit of the normal voltage operating range.&#10;As soon as the minimum line voltage falls below this limit, hvrt and lvrt limt curve inspection start and subsequent requriements have to be fulfilled until all line voltages are above the limit again or the time limit 'flt_timeout' is reached.&#10;Value is relative to the reference voltage input variable 'u_ref'."/>
+        <parameter name="limit_norm_high" type="%" value="110" description="Upper limit of the normal voltage operating range.&#10;As soon as the maximum line voltage exceeds this limit, hvrt and lvrt limt curve inspection start and subsequent requriements have to be fulfilled until all line voltages are below the limit again or the time limit 'flt_timeout' is reached.&#10;Value is relative to the reference voltage input variable 'u_ref'."/>
+        <parameter name="limit_lvrt_sym" type="((s %))" value="((0 0) (0.15 0) (0.15 25) (0.3 70) (0.5 70) (1.5 85))" description="Low voltage ride through limit curve for symmetric (3-pol.) faults.&#10;A fault is symmetric as soon as all three line voltages fall below the lower limit of the normal operating range 'limit_norm_low'.&#10;As soon as the minimum line voltage falls below this limit, no subsequent requriements have to be fulfilled and the power plant is allowed to disconnect.&#10;Voltage values are relative to input variable 'u_ref'."/>
+        <parameter name="limit_lvrt_asym" type="((s %))" value="((0 0) (0.22 0) (0.22 30) (0.45 60) (0.6 60) (1.5 75) (3 75) (3 85))" description="Low voltage ride through limit curve for asymmetric (1- or 2-pol.) faults.&#10;As soon as the minimum line voltage falls below this limit, no subsequent requriements have to be fulfilled and the power plant is allowed to disconnect.&#10;Voltage values are relative to input variable 'u_ref'."/>
+        <parameter name="limit_hvrt_rel" type="((s %))" value="((0 25) (0.1 25) (0.1 15) (60 15) (60 10))" description="High voltage ride through limit curve for symmetrical and asymmetrical faults with respect to the 1-min moving average of the maximum line voltage, see figure 10 in the grid code.&#10;As soon as the maximum line voltage exceeds this limit, no subsequent requirements have to be fulfilled but the power plant is not allowed to disconnect."/>
+        <parameter name="limit_hvrt_abs" type="((s %))" value="((0 130) (0.1 130) (0.1 125) (60 125) (60 115))" description="High voltage ride through limit curve for symmetrical and asymmetrical faults.&#10;As soon as the maximum line voltage exceeds this limit, no subsequent requriements have to be fulfilled and the power plant is allowed to disconnect.&#10;Voltage values are relative to input variable 'u_ref'."/>
+        <parameter name="flt_timeout" type="s" value="5" description="Time limit of the fault. After this time, the fault ends and no subsequent requirements have to be fulfilled."/>
+    </parameters>
+    <variables>
+        <variable name="connected" type=":digital" mode="IN" description="Breaker status of the power plant. Should be TRUE if the power plant is connected to the grid and FALSE otherwise."/>
+        <variable name="enabled" type=":digital" mode="IN" description="Input variable to en- or disable the monitor during measurement."/>
+        <variable name="u_1" type="V" mode="IN" description="Line-Line voltage (1-2)."/>
+        <variable name="u_2" type="V" mode="IN" description="Line-Line voltage (2-3)."/>
+        <variable name="u_3" type="V" mode="IN" description="Line-Line voltage (3-1)."/>
+        <variable name="u_ref" type="V" mode="IN" description="The reference voltage used to calculate the limits.&#10;Can be bound to a constant value, like the nominal voltage or the rated voltage, or an input signal like the 10-min-mean voltage."/>
+        <variable name="u_max" type="V" mode="OUT" description="Maximum voltage value of the three line voltages.&#10;Used to check the upper limit of the normal operating range 'limit_norm_high' and the hvrt limit curves 'limit_hvrt_abs' and 'limit_hvrt_rel'."/>
+        <variable name="u_min" type="V" mode="OUT" description="Minimum voltage value of the three line voltages.&#10;Used to check the lower limit of the normal operating range 'limit_norm_low' and the lvrt limit curves 'limit_lvrt_sym' and 'limit_lvrt_asym'."/>
+        <variable name="mode_normal" type=":digital" mode="OUT" description="No fault - All three line voltages are in normal operating range."/>
+        <variable name="mode_flt_requirement" type=":digital" mode="OUT" description="Fault - Subsequent requirements have to be fulfilled."/>
+        <variable name="mode_flt_no_req" type=":digital" mode="OUT" description="Fault - No subsequent requirements have to be fulfilled."/>
+        <variable name="mode_flt_disconnect" type=":digital" mode="OUT" description="Fault - The power plant is allowed to disconnect."/>
+        <variable name="is_sym_flt" type=":digital" mode="OUT" description="This fault is a symmetrical (3-pol.) low voltage fault. That means, at some point during the fault, all three line voltages have fallen below the lower limit of the normal operating range 'limit_norm_low'."/>
+        <variable name="limit_lvrt" type="V" mode="OUT" description="During normal operation, it is the current value of the lower limit of the normal voltage operating range, 'limit_norm_low'.&#10;During a fault, it is the current value of the low voltage limit calculated from 'limit_lvrt_sym' or 'limit_lvrt_asym', whichever applies."/>
+        <variable name="limit_hvrt" type="V" mode="OUT" description="During normal operation, it is the current value of the upper limit of the normal voltage operating range, 'limit_norm_high'.&#10;During a fault, it is the current value of the high voltage limit calculated from 'limit_hvrt_abs'."/>
+    </variables>
+    <state-variables>
+        <state-variable name="t0" initial-value="0&#10;;start time of the fault"/>
+        <state-variable name="mode_normal" initial-value="t&#10;;see corresponding output variable"/>
+        <state-variable name="mode_flt_requirement" initial-value="NIL&#10;;see corresponding output variable"/>
+        <state-variable name="mode_flt_no_req" initial-value="NIL&#10;;see corresponding output variable"/>
+        <state-variable name="mode_flt_disconnect" initial-value="NIL&#10;;see corresponding output variable"/>
+        <state-variable name="setpoints_lvrt" initial-value="nil&#10;;the currently used lvrt limit curve&#10;;limit_lvrt_asym or limit_lvrt_sym"/>
+        <state-variable name="is_sym_flt" initial-value="NIL&#10;;see corresponding output variable"/>
+        <state-variable name="limit0" initial-value="0&#10;;currently used lower voltage limit"/>
+        <state-variable name="limit1" initial-value="0&#10;;currently used upper voltage limit"/>
+        <state-variable name="frt_type" initial-value="&quot;LVRT&quot;&#10;;current fault type, &quot;LVRT&quot; or &quot;HVRT&quot;"/>
+        <state-variable name="u_max_mean" initial-value="0&#10;;current 1-min-mean value of the maximum of the three line voltages, used for limit_hvrt_rel calculation"/>
+    </state-variables>
+    <subchart x="0.0" y="0.0" id="0">
+        <expression>ROOT</expression>
+        <elements>
+            <state x="550.0" y="-625.0" id="1">
+                <expression>Start</expression>
+            </state>
+            <subchart x="475.0" y="-225.0" id="2">
+                <expression>normal
+;monitor state when voltage is in normal operating range</expression>
+                <elements>
+                    <decision x="400.0" y="-1125.0" id="3">
+                        <expression>enabled</expression>
+                    </decision>
+                    <state x="475.0" y="-425.0" id="4">
+                        <expression>disconnected/END</expression>
+                    </state>
+                    <process x="850.0" y="-775.0" id="5">
+                        <expression>(setf t0 time)
+(setf mode_normal nil)
+(setf mode_flt_requirement t)
+(start-event (concat frt_type " started") nil)</expression>
+                    </process>
+                    <state x="475.0" y="-1225.0" id="6">
+                        <expression>Start</expression>
+                    </state>
+                    <state x="700.0" y="-1075.0" id="7">
+                        <expression>END</expression>
+                    </state>
+                    <decision x="400.0" y="-775.0" id="8">
+                        <expression>connected</expression>
+                    </decision>
+                    <decision x="400.0" y="-950.0" id="9">
+                        <expression>(or (&lt; u_min limit0) (&gt; u_max limit1))</expression>
+                    </decision>
+                    <state x="100.0" y="-725.0" id="10">
+                        <expression>END</expression>
+                    </state>
+                    <line from-pt="2" to-pt="0" from-id="6" to-id="3" id="11"/>
+                    <line from-pt="2" to-pt="0" from-id="9" to-id="8" id="14">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="3" to-id="9" id="15">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="3" to-id="7" id="16">
+                        <expression>NIL</expression>
+                    </line>
+                    <process x="400.0" y="-625.0" id="17">
+                        <expression>(setf mode_normal nil)</expression>
+                    </process>
+                    <line from-pt="2" to-pt="0" from-id="8" to-id="17" id="18">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="17" to-id="4" id="19"/>
+                    <state x="925.0" y="-575.0" id="20">
+                        <expression>to_flt_requirement
+;continue in state flt_requirement</expression>
+                    </state>
+                    <decision x="625.0" y="-950.0" id="177">
+                        <expression>(&lt; u_min limit0)</expression>
+                    </decision>
+                    <line from-pt="1" to-pt="3" from-id="9" to-id="177" id="178">
+                        <expression>T</expression>
+                    </line>
+                    <process x="850.0" y="-950.0" id="180">
+                        <expression>(setf frt_type "HVRT")</expression>
+                    </process>
+                    <line from-pt="1" to-pt="3" from-id="177" to-id="180" id="181">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="3" from-id="177" to-id="5" id="237">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="180" to-id="5" id="238"/>
+                    <line from-pt="2" to-pt="0" from-id="5" to-id="20" id="239"/>
+                    <process x="200.0" y="-775.0" id="243">
+                        <expression>(record u_max)
+(setf u_max_mean (mean 60))</expression>
+                    </process>
+                    <line from-pt="3" to-pt="1" from-id="8" to-id="243" id="244">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="3" to-pt="1" from-id="243" to-id="10" id="245"/>
+                </elements>
+            </subchart>
+            <subchart x="775.0" y="-75.0" id="22">
+                <expression>flt_requirement
+;monitor state where monitor is in fault state and subsequent requirements have to be fulfilled</expression>
+                <elements>
+                    <decision x="725.0" y="-975.0" id="23">
+                        <expression>enabled</expression>
+                    </decision>
+                    <process x="925.0" y="-825.0" id="24">
+                        <expression>(setf limit_lvrt (* u_ref (/ (setpoint setpoints_lvrt (- time t0)) 100.0)))
+(setf limit_hvrt (* u_ref (/ (setpoint limit_hvrt_abs (- time t0)) 100.0)))</expression>
+                    </process>
+                    <process x="1125.0" y="-675.0" id="25">
+                        <expression>(setf mode_flt_requirement nil)
+(setf mode_flt_disconnect t)
+(info-event (concat "Limit violated during " frt_type ", generator is allowed to disconnect") nil)</expression>
+                    </process>
+                    <state x="800.0" y="-1075.0" id="26">
+                        <expression>Start</expression>
+                    </state>
+                    <state x="1600.0" y="-925.0" id="27">
+                        <expression>normal/END</expression>
+                    </state>
+                    <process x="1575.0" y="-825.0" id="28">
+                        <expression>(setf mode_flt_requirement nil)
+(setf mode_flt_no_req t)
+(info-event (concat "Time limit reached during " frt_type ", generator must not meet further requirements") nil)</expression>
+                    </process>
+                    <process x="1025.0" y="-975.0" id="29">
+                        <expression>(end-event t (concat "Monitor disabled during " frt_type) nil)</expression>
+                    </process>
+                    <decision x="725.0" y="-825.0" id="30">
+                        <expression>(or (&lt; u_min limit0) (&gt; u_max limit1))</expression>
+                    </decision>
+                    <decision x="1350.0" y="-825.0" id="31">
+                        <expression>(&gt; (- time t0) flt_timeout)</expression>
+                    </decision>
+                    <process x="1275.0" y="-975.0" id="32">
+                        <expression>(reset)</expression>
+                    </process>
+                    <decision x="1125.0" y="-825.0" id="33">
+                        <expression>(or (&lt; u_min limit_lvrt) (&gt; u_max limit_hvrt))</expression>
+                    </decision>
+                    <line from-pt="2" to-pt="0" from-id="26" to-id="23" id="35"/>
+                    <line from-pt="1" to-pt="3" from-id="23" to-id="29" id="40">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="32" to-id="27" id="41"/>
+                    <line from-pt="1" to-pt="3" from-id="29" to-id="32" id="42"/>
+                    <state x="1825.0" y="-700.0" id="44">
+                        <expression>to_flt_no_req</expression>
+                    </state>
+                    <state x="1200.0" y="-475.0" id="46">
+                        <expression>to_flt_disconnect</expression>
+                    </state>
+                    <decision x="1350.0" y="-675.0" id="260">
+                        <expression>(&gt; (* (/ (- u_max u_max_mean) u_ref) 100) (setpoint limit_hvrt_rel (- time t0)))</expression>
+                    </decision>
+                    <line from-pt="2" to-pt="0" from-id="33" to-id="25" id="378">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="24" to-id="33" id="379"/>
+                    <line from-pt="2" to-pt="0" from-id="25" to-id="46" id="573"/>
+                    <line from-pt="2" to-pt="0" from-id="23" to-id="30" id="583">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="30" to-id="24" id="584">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="2" to-pt="3" from-id="30" to-id="46" id="585">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="1" from-id="260" to-id="46" id="625">
+                        <expression>nil</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="31" to-id="260" id="628">
+                        <expression>nil</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="33" to-id="31" id="629">
+                        <expression>nil</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="31" to-id="28" id="630">
+                        <expression>T</expression>
+                    </line>
+                    <process x="1575.0" y="-675.0" id="631">
+                        <expression>(setf mode_flt_requirement nil)
+(setf mode_flt_no_req t)
+(info-event "Relative limit for high voltage violated, generator must not meet further requirements" nil)</expression>
+                    </process>
+                    <line from-pt="1" to-pt="3" from-id="260" to-id="631" id="632">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="0" from-id="28" to-id="44" id="728"/>
+                    <line from-pt="1" to-pt="2" from-id="631" to-id="44" id="729"/>
+                </elements>
+            </subchart>
+            <process x="475.0" y="-525.0" id="50">
+                <expression>(setf limit0 (* u_ref (/ limit_norm_low 100.0)))
+(setf limit1 (* u_ref (/ limit_norm_high 100.0)))
+(setf setpoints_lvrt limit_lvrt_asym)
+(setf limit_lvrt limit0)
+(setf limit_hvrt limit1)
+(setf u_min (min u_1 u_2 u_3))
+(setf u_max (max u_1 u_2 u_3))
+;set state and output variables</expression>
+            </process>
+            <line from-pt="2" to-pt="0" from-id="1" to-id="50" id="51">
+                <expression>;continue</expression>
+            </line>
+            <subchart x="1050.0" y="-75.0" id="52">
+                <expression>flt_no_req
+;monitor state where monitor is in fault state and no subsequent requirements have to be fulfilled</expression>
+                <elements>
+                    <process x="850.0" y="-700.0" id="53">
+                        <expression>(reset)</expression>
+                    </process>
+                    <state x="375.0" y="-800.0" id="54">
+                        <expression>Start</expression>
+                    </state>
+                    <state x="800.0" y="-325.0" id="55">
+                        <expression>to_flt_disconnect</expression>
+                    </state>
+                    <state x="1175.0" y="-650.0" id="56">
+                        <expression>normal/END</expression>
+                    </state>
+                    <process x="300.0" y="-525.0" id="58">
+                        <expression>(setf limit_lvrt (* u_ref (/ (setpoint setpoints_lvrt (- time t0)) 100.0)))
+(setf limit_hvrt (* u_ref (/ (setpoint limit_hvrt_abs (- time t0)) 100.0)))</expression>
+                    </process>
+                    <process x="525.0" y="-375.0" id="59">
+                        <expression>(setf mode_flt_no_req nil)
+(setf mode_flt_disconnect t)
+(info-event (concat "Limit violated during " frt_type ", generator is allowed to disconnect") nil)</expression>
+                    </process>
+                    <decision x="300.0" y="-375.0" id="60">
+                        <expression>(or (&lt; u_min limit_lvrt) (&gt; u_max limit_hvrt))</expression>
+                    </decision>
+                    <decision x="300.0" y="-700.0" id="61">
+                        <expression>enabled</expression>
+                    </decision>
+                    <line from-pt="1" to-pt="3" from-id="53" to-id="56" id="62"/>
+                    <line from-pt="2" to-pt="0" from-id="54" to-id="61" id="63"/>
+                    <line from-pt="2" to-pt="0" from-id="58" to-id="60" id="65"/>
+                    <line from-pt="1" to-pt="3" from-id="59" to-id="55" id="66"/>
+                    <line from-pt="1" to-pt="3" from-id="60" to-id="59" id="67">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="61" to-id="58" id="69">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="2" to-pt="2" from-id="60" to-id="55" id="70">
+                        <expression>NIL</expression>
+                    </line>
+                    <process x="575.0" y="-700.0" id="240">
+                        <expression>(end-event t (concat "Monitor disabled during " frt_type) nil)</expression>
+                    </process>
+                    <line from-pt="1" to-pt="3" from-id="61" to-id="240" id="241">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="240" to-id="53" id="242"/>
+                </elements>
+            </subchart>
+            <subchart x="1350.0" y="-75.0" id="71">
+                <expression>flt_disconnect
+;monitor state where power plant is allowed to disconnect</expression>
+                <elements>
+                    <process x="1500.0" y="-400.0" id="72">
+                        <expression>(reset)</expression>
+                    </process>
+                    <state x="975.0" y="-500.0" id="73">
+                        <expression>START</expression>
+                    </state>
+                    <decision x="900.0" y="-400.0" id="74">
+                        <expression>enabled</expression>
+                    </decision>
+                    <state x="1775.0" y="-350.0" id="75">
+                        <expression>normal/END</expression>
+                    </state>
+                    <process x="1225.0" y="-400.0" id="76">
+                        <expression>(end-event t (concat "Monitor disabled during " frt_type) nil)</expression>
+                    </process>
+                    <process x="900.0" y="-225.0" id="77">
+                        <expression>(setf limit_lvrt (* u_ref (/ (setpoint setpoints_lvrt (- time t0)) 100.0)))
+(setf limit_hvrt (* u_ref (/ (setpoint limit_hvrt_abs (- time t0)) 100.0)))</expression>
+                    </process>
+                    <process x="1375.0" y="-50.0" id="78">
+                        <expression>(end-event t (concat "Regular generator disconnect during " frt_type) nil)
+(reset)
+(setf mode_normal nil)</expression>
+                    </process>
+                    <process x="1125.0" y="-225.0" id="79">
+                        <expression>(end-event nil (concat "Irregular generator disconnect during " frt_type) nil)
+(reset)
+(setf mode_normal nil)</expression>
+                    </process>
+                    <line from-pt="2" to-pt="0" from-id="73" to-id="74" id="80"/>
+                    <line from-pt="1" to-pt="3" from-id="72" to-id="75" id="81"/>
+                    <line from-pt="1" to-pt="3" from-id="76" to-id="72" id="82"/>
+                    <line from-pt="1" to-pt="3" from-id="74" to-id="76" id="83">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="74" to-id="77" id="84">
+                        <expression>T</expression>
+                    </line>
+                    <decision x="900.0" y="-50.0" id="85">
+                        <expression>connected</expression>
+                    </decision>
+                    <line from-pt="2" to-pt="0" from-id="77" to-id="85" id="86"/>
+                    <decision x="1125.0" y="-50.0" id="87">
+                        <expression>mode_flt_disconnect</expression>
+                    </decision>
+                    <line from-pt="1" to-pt="3" from-id="85" to-id="87" id="88">
+                        <expression>nil</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="87" to-id="78" id="89">
+                        <expression>T</expression>
+                    </line>
+                    <state x="1450.0" y="-175.0" id="90">
+                        <expression>to_disconnected</expression>
+                    </state>
+                    <state x="975.0" y="350.0" id="91">
+                        <expression>END</expression>
+                    </state>
+                    <state x="1650.0" y="150.0" id="92">
+                        <expression>normal/END</expression>
+                    </state>
+                    <decision x="900.0" y="100.0" id="93">
+                        <expression>(or (&lt; u_min limit0) (&gt; u_max limit1))</expression>
+                    </decision>
+                    <process x="1375.0" y="100.0" id="94">
+                        <expression>(reset)</expression>
+                    </process>
+                    <process x="1125.0" y="100.0" id="95">
+                        <expression>(end-event t (concat frt_type " ended") nil)</expression>
+                    </process>
+                    <line from-pt="1" to-pt="3" from-id="94" to-id="92" id="96"/>
+                    <line from-pt="1" to-pt="3" from-id="95" to-id="94" id="97"/>
+                    <line from-pt="0" to-pt="2" from-id="87" to-id="79" id="98">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="0" to-pt="2" from-id="78" to-id="90" id="99"/>
+                    <line from-pt="1" to-pt="3" from-id="79" to-id="90" id="100"/>
+                    <line from-pt="2" to-pt="0" from-id="85" to-id="93" id="101">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="93" to-id="95" id="102">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="93" to-id="91" id="103">
+                        <expression>T</expression>
+                    </line>
+                </elements>
+            </subchart>
+            <subchart x="1650.0" y="-75.0" id="104">
+                <expression>disconnected
+;power plant is disconnected</expression>
+                <elements>
+                    <process x="750.0" y="100.0" id="105">
+                        <expression>(reset)</expression>
+                    </process>
+                    <state x="1025.0" y="150.0" id="106">
+                        <expression>normal/END</expression>
+                    </state>
+                    <decision x="750.0" y="-50.0" id="107">
+                        <expression>(and (&gt; u_min limit0) (&lt; u_max limit1) connected)</expression>
+                    </decision>
+                    <line from-pt="1" to-pt="3" from-id="105" to-id="106" id="108"/>
+                    <line from-pt="2" to-pt="0" from-id="107" to-id="105" id="109">
+                        <expression>t</expression>
+                    </line>
+                    <state x="825.0" y="-150.0" id="110">
+                        <expression>START</expression>
+                    </state>
+                    <line from-pt="2" to-pt="0" from-id="110" to-id="107" id="111"/>
+                    <state x="1025.0" y="0.0" id="112">
+                        <expression>END</expression>
+                    </state>
+                    <line from-pt="1" to-pt="3" from-id="107" to-id="112" id="113">
+                        <expression>NIL</expression>
+                    </line>
+                </elements>
+            </subchart>
+            <line from-pt="1" to-pt="3" from-id="22" to-id="52" id="114">
+                <expression>to_flt_no_req</expression>
+            </line>
+            <line from-pt="1" to-pt="3" from-id="52" to-id="71" id="115">
+                <expression>to_flt_disconnect</expression>
+            </line>
+            <line from-pt="1" to-pt="3" from-id="71" to-id="104" id="116">
+                <expression>to_disconnected</expression>
+            </line>
+            <decision x="475.0" y="-375.0" id="117">
+                <expression>mode_normal</expression>
+            </decision>
+            <decision x="775.0" y="-375.0" id="118">
+                <expression>mode_flt_requirement</expression>
+            </decision>
+            <line from-pt="2" to-pt="2" from-id="22" to-id="71" id="119">
+                <expression>to_flt_disconnect</expression>
+            </line>
+            <decision x="1050.0" y="-375.0" id="120">
+                <expression>mode_flt_no_req</expression>
+            </decision>
+            <decision x="1350.0" y="-375.0" id="121">
+                <expression>mode_flt_disconnect</expression>
+            </decision>
+            <line from-pt="1" to-pt="3" from-id="118" to-id="120" id="122">
+                <expression>NIL</expression>
+            </line>
+            <line from-pt="1" to-pt="3" from-id="120" to-id="121" id="123">
+                <expression>NIL</expression>
+            </line>
+            <line from-pt="1" to-pt="0" from-id="121" to-id="104" id="124">
+                <expression>NIL</expression>
+            </line>
+            <line from-pt="1" to-pt="3" from-id="117" to-id="118" id="125">
+                <expression>NIL
+;false</expression>
+            </line>
+            <line from-pt="2" to-pt="0" from-id="117" to-id="2" id="126">
+                <expression>T
+;true</expression>
+            </line>
+            <subchart x="775.0" y="-225.0" id="127">
+                <expression>set_sym_flt
+;check if fault is symmetric
+;if yes, use limit_lvrt_sym for the rest of the fault</expression>
+                <elements>
+                    <process x="1050.0" y="-600.0" id="128">
+                        <expression>(setf setpoints_lvrt limit_lvrt_sym)</expression>
+                    </process>
+                    <process x="825.0" y="-600.0" id="129">
+                        <expression>(setf is_sym_flt t)
+(info-event "All three voltages lower than threshold, synchronous fault" nil)</expression>
+                    </process>
+                    <decision x="625.0" y="-775.0" id="130">
+                        <expression>is_sym_flt</expression>
+                    </decision>
+                    <decision x="625.0" y="-600.0" id="131">
+                        <expression>(&lt; u_max limit0)</expression>
+                    </decision>
+                    <line from-pt="1" to-pt="3" from-id="129" to-id="128" id="132"/>
+                    <line from-pt="1" to-pt="0" from-id="130" to-id="128" id="133">
+                        <expression>T</expression>
+                    </line>
+                    <line from-pt="2" to-pt="0" from-id="130" to-id="131" id="134">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="1" to-pt="3" from-id="131" to-id="129" id="135">
+                        <expression>T</expression>
+                    </line>
+                    <state x="700.0" y="-900.0" id="136">
+                        <expression>START</expression>
+                    </state>
+                    <line from-pt="2" to-pt="0" from-id="136" to-id="130" id="137"/>
+                    <state x="700.0" y="-375.0" id="138">
+                        <expression>continue</expression>
+                    </state>
+                    <line from-pt="2" to-pt="0" from-id="131" to-id="138" id="139">
+                        <expression>NIL</expression>
+                    </line>
+                    <line from-pt="2" to-pt="1" from-id="128" to-id="138" id="140"/>
+                </elements>
+            </subchart>
+            <line from-pt="2" to-pt="0" from-id="50" to-id="117" id="141"/>
+            <line from-pt="2" to-pt="0" from-id="118" to-id="127" id="142">
+                <expression>T</expression>
+            </line>
+            <line from-pt="2" to-pt="0" from-id="127" to-id="22" id="143">
+                <expression>continue</expression>
+            </line>
+            <line from-pt="1" to-pt="3" from-id="2" to-id="127" id="144">
+                <expression>to_flt_requirement
+;but first check if it is sym flt</expression>
+            </line>
+            <reference referenced-id="127" x="1050.0" y="-225.0" id="730">
+                <expression>set_sym_flt
+;check if fault is symmetric
+;if yes, use limit_lvrt_sym for the rest of the fault</expression>
+            </reference>
+            <line from-pt="2" to-pt="0" from-id="120" to-id="730" id="731">
+                <expression>T</expression>
+            </line>
+            <line from-pt="2" to-pt="0" from-id="730" to-id="52" id="732">
+                <expression>continue</expression>
+            </line>
+            <reference referenced-id="127" x="1350.0" y="-225.0" id="733">
+                <expression>set_sym_flt
+;check if fault is symmetric
+;if yes, use limit_lvrt_sym for the rest of the fault</expression>
+            </reference>
+            <line from-pt="2" to-pt="0" from-id="121" to-id="733" id="734">
+                <expression>T</expression>
+            </line>
+            <line from-pt="2" to-pt="0" from-id="733" to-id="71" id="735">
+                <expression>continue</expression>
+            </line>
+        </elements>
+    </subchart>
+</flowchart>
