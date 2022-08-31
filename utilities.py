@@ -178,4 +178,69 @@ class Utilities:
     def oneTwentyDegrees(degree = 120):
         return degree
 
-    
+    ## This is just a test method
+    @staticmethod
+    def method_to_test_within_class_call():
+        return Utilities.oneTwentyDegrees()
+
+    ### This method accepts an RMS signal and N which represents the computes the 
+    @staticmethod
+    def compute_fourier_transform_from_rms(rms,N,sampling_freq):
+        if (N > len(rms)):
+            raise Exception("Sorry the number of points to fourier transform 'N' needs to be less than number of datapoints in rms signal")
+
+        if ((sampling_freq/N) != 0.1 & (sampling_freq/N) == 1):
+            raise Exception("(Sampling Frequency/N) needs to be 1 or 0.1")
+        
+        datapoints = []
+        for inst in np.arange(0,N,1):
+            datapoints.append(rms[inst])
+            y = fft(datapoints)
+            x = fftfreq(N,1/(ComtradeConfig.frequency()*2))
+        ######### NOT Complete to be continued
+
+        return 
+
+
+    ### This function is used to generate t
+    @staticmethod 
+    def generate_cfg_contents():
+        from datetime import datetime, timedelta
+        date_and_time = datetime.now()
+        date_and_time_string_start = date_and_time.strftime("%d/%m/%Y, %H:%M:%S.%f")
+        date_and_time_end = date_and_time + timedelta(seconds=(1/ComtradeConfig.sampling_rate())*ComtradeConfig.sample_end(ComtradeConfig.sampling_rate(), ComtradeConfig.seconds()))
+        date_and_time_string_end = date_and_time_end.strftime("%d/%m/%Y, %H:%M:%S.%f")
+        
+        voltage_peak = ComtradeConfig.voltage_peak()
+        current_peak = ComtradeConfig.current_peak()
+        
+
+        ## construct the data for config file
+        comtrade_cfg_data = []
+
+        comtrade_cfg_data.append(",," + str(ComtradeConfig.year()))
+        comtrade_cfg_data.append("6,6A,0D")
+        comtrade_cfg_data.append("1,v1,a,,V," + str(ComtradeConfig.channel_multiplier_voltage) + ",0,0,-32767,32767,1,1,s")
+        comtrade_cfg_data.append("2,v2,b,,V," + str(ComtradeConfig.channel_multiplier_voltage) + ",0,0,-32767,32767,1,1,s")
+        comtrade_cfg_data.append("3,v3,c,,V," + str(ComtradeConfig.channel_multiplier_voltage) + ",0,0,-32767,32767,1,1,s")
+        comtrade_cfg_data.append("4,iq,a,,A," + str(ComtradeConfig.channel_multiplier_current) + ",0,0,-32767,32767,1,1,s")
+        comtrade_cfg_data.append("5,iq,b,,A," + str(ComtradeConfig.channel_multiplier_current) + ",0,0,-32767,32767,1,1,s")
+        comtrade_cfg_data.append("6,iq,c,,A," + str(ComtradeConfig.channel_multiplier_current) + ",0,0,-32767,32767,1,1,s")
+        comtrade_cfg_data.append(str(ComtradeConfig.frequency))
+        comtrade_cfg_data.append("1")
+        comtrade_cfg_data.append(str(ComtradeConfig.sampling_rate()) + "," + str(ComtradeConfig.sample_end(ComtradeConfig.sampling_rate(), ComtradeConfig.seconds())))
+        comtrade_cfg_data.append(date_and_time_string_start)
+        comtrade_cfg_data.append(date_and_time_string_end)
+        comtrade_cfg_data.append("ASCII")
+        comtrade_cfg_data.append("1")
+        
+        return comtrade_cfg_data
+
+    @staticmethod
+    def build_cfg(filename = "six_analog_signals_zero_digital.cfg"):
+        comtrade_cfg_data = Utilities.generate_cfg_contents()
+        f_cfg = open(filename,"w")
+        for cfg_line in comtrade_cfg_data:
+            f_cfg.write(cfg_line + "\n")
+
+        f_cfg.close()
